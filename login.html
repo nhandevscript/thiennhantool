@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Đăng Nhập{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 0 auto;">
+    <h2 style="font-size: 1.5em; font-weight: bold; text-align: center; margin-bottom: 20px;">Đăng Nhập Hệ Thống</h2>
+    
+    <!-- Form User/Admin -->
+    <form method="POST" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; margin-bottom: 20px;">
+        <p style="font-weight: bold; margin-bottom: 10px;">1. Admin / User</p>
+        <input type="hidden" name="role" value="user">
+        <input type="text" name="username" placeholder="Tên đăng nhập (Admin: thiennhan)" class="input-text">
+        <input type="password" name="password" placeholder="Mật khẩu (Admin: admin)" class="input-password">
+        <button class="btn btn-primary" style="margin-top: 5px;">Đăng Nhập User/Admin <i class="fas fa-user-lock"></i></button>
+    </form>
+
+    <!-- Form Xem Tool -->
+    <form method="POST">
+        <p style="font-weight: bold; margin-bottom: 10px;">2. Tool Độc Lập (Web View)</p>
+        <input type="hidden" name="role" value="tool">
+        <input type="text" name="tool_code" placeholder="Nhập Mã Tool để xem" class="input-text">
+        <button class="btn btn-secondary" style="margin-top: 5px;">Xem Thông Tin Tool <i class="fas fa-tools"></i></button>
+    </form>
+</div>
+{% endblock %}
+

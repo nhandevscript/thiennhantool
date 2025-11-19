@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Bảng Điều Khiển Admin{% endblock %}
+
+{% block content %}
+<h2 style="font-size: 2em; font-weight: bold; text-align: center; color: #444; margin-bottom: 20px;">Bảng Điều Khiển Quản Trị</h2>
+
+<div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+    <!-- Quản lý Users -->
+    <div class="card" style="border-left: 5px solid var(--color-primary);">
+        <h3 style="font-size: 1.25em; font-weight: bold; color: var(--color-primary); margin-bottom: 15px;">Quản lý User <i class="fas fa-users"></i></h3>
+        
+        <!-- Form Thêm User -->
+        <form method="POST" style="border-bottom: 1px solid #ccc; padding-bottom: 15px; margin-bottom: 15px;">
+            <input type="text" name="user_name" placeholder="Tên User mới" required class="input-text">
+            <input type="password" name="user_pass" placeholder="Mật khẩu" required class="input-password">
+            <input type="number" name="user_time" value="30" min="0" required class="input-number" placeholder="Hạn dùng (Ngày)">
+            <button type="submit" name="add_user" class="btn btn-primary" style="background-color: var(--color-success);">
+                <i class="fas fa-plus"></i> Thêm User
+            </button>
+        </form>
+
+        <!-- Danh sách Users -->
+        <h4 style="font-weight: bold; margin-bottom: 10px;">Danh sách Users:</h4>
+        <div style="max-height: 200px; overflow-y: auto;">
+            {% for u in users %}
+            <div class="list-item">
+                <span style="font-weight: 500;">{{ u.name }}</span>
+                <div style="display: flex; align-items: center;">
+                    <span class="text-small">Hạn: {{ u.expiry_date.split(' ')[0] }}</span>
+                    {% if u.name != 'thiennhan' %}
+                    <form method="POST" style="margin-left: 10px;">
+                        <input type="hidden" name="delete_user_name" value="{{ u.name }}">
+                        <button type="submit" name="delete_user" style="color: var(--color-danger); background: none; border: none; font-size: 0.9em; cursor: pointer;">
+                            <i class="fas fa-times"></i> Xóa
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Quản lý Tools -->
+    <div class="card" style="border-left: 5px solid var(--color-secondary);">
+        <h3 style="font-size: 1.25em; font-weight: bold; color: var(--color-secondary); margin-bottom: 15px;">Quản lý Mã Tool (API Key) <i class="fas fa-key"></i></h3>
+        
+        <!-- Form Thêm Tool -->
+        <form method="POST" style="border-bottom: 1px solid #ccc; padding-bottom: 15px; margin-bottom: 15px;">
+            <input type="text" name="tool_user" placeholder="Tên gợi nhớ Tool" required class="input-text">
+            <input type="text" name="tool_code" placeholder="Mã Tool (API Key)" required class="input-text" style="font-family: monospace;">
+            <button type="submit" name="add_tool" class="btn btn-secondary" style="background-color: var(--color-secondary);">
+                <i class="fas fa-plus"></i> Thêm Mã Tool
+            </button>
+        </form>
+
+        <!-- Danh sách Tools -->
+        <h4 style="font-weight: bold; margin-bottom: 10px;">Danh sách Tools:</h4>
+        <div style="max-height: 200px; overflow-y: auto;">
+            {% for t in tools %}
+            <div class="list-item">
+                <span style="font-weight: 500;">{{ t.name }} <br><code style="background-color: #f0f0f0; padding: 2px 4px; border-radius: 3px;">{{ t.tool_code }}</code></span>
+                <form method="POST">
+                    <input type="hidden" name="delete_tool_code" value="{{ t.tool_code }}">
+                    <button type="submit" name="delete_tool" style="color: var(--color-danger); background: none; border: none; font-size: 0.9em; cursor: pointer;">
+                        <i class="fas fa-times"></i> Xóa
+                    </button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

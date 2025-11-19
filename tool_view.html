@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Thông Tin Tool API{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 0 auto; text-align: center; border-top: 5px solid var(--color-secondary);">
+    <h2 style="font-size: 1.5em; font-weight: bold; color: var(--color-secondary); margin-bottom: 20px;">Thông tin Tool Độc Lập</h2>
+    
+    <div style="padding: 15px; border-radius: 4px; background-color: #f2f2ff; border: 1px solid #ddd;">
+        <p style="font-weight: 500; color: #444;">Tên Tool:</p>
+        <p style="font-size: 1.4em; font-weight: bold; color: var(--color-secondary); margin-bottom: 15px;">{{ tool.name }}</p>
+        
+        <p style="font-weight: 500; color: #444;">Mã Tool (API Key):</p>
+        <code style="font-size: 1.1em; font-family: monospace; background-color: white; padding: 5px 10px; border-radius: 3px; display: inline-block;">
+            {{ tool.tool_code }}
+        </code>
+    </div>
+    
+    <div class="text-small" style="margin-top: 20px; color: #666;">
+        Tool độc lập của bạn sẽ sử dụng mã này để kết nối và xác thực qua API.
+    </div>
+</div>
+{% endblock %}
+

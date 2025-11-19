@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hệ Thống Quản Lý{% endblock %}</title>
+    
+    <!-- CSS Tự định nghĩa -->
+    <style>
+        :root {
+            --color-primary: #3b82f6; /* Blue 500 */
+            --color-secondary: #a855f7; /* Purple 500 */
+            --color-success: #10b981; /* Green 500 */
+            --color-danger: #ef4444; /* Red 500 */
+            --color-bg: #f3f4f6; /* Gray 100 */
+        }
+        body { 
+            font-family: sans-serif; 
+            background-color: var(--color-bg); 
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 650px;
+        }
+        .card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            margin-bottom: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .input-text, .input-password, .input-number {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+        .btn-primary { background-color: var(--color-primary); }
+        .btn-secondary { background-color: var(--color-secondary); }
+        .btn-danger { background-color: var(--color-danger); }
+        .btn:hover { opacity: 0.9; }
+        .message-box {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            background-color: #fef3c7; /* Yellow 100 */
+            color: #b45309; /* Amber 800 */
+        }
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        .text-small { font-size: 0.8em; color: #666; }
+    </style>
+    <!-- Thư viện icon (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <h1 style="font-size: 1.5em; font-weight: bold; color: #333;">Quản Lý Hệ Thống</h1>
+            {% if session.get('logged_in_as') %}
+                <div style="text-align: right;">
+                    <span style="color: #666;">Xin chào:</span> 
+                    <span style="font-weight: bold; color: var(--color-primary);">{{ session.get('logged_in_as') }}</span>
+                    <span class="text-small" style="background-color: #eee; padding: 2px 6px; border-radius: 4px; margin-left: 5px;">{{ session.get('role').upper() }}</span>
+                    <a href="{{ url_for('logout') }}" style="color: var(--color-danger); margin-left: 10px; text-decoration: none;">Đăng xuất <i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            {% endif %}
+        </header>
+
+        <!-- Thông báo (Nếu có) -->
+        {% if message %}
+        <div class="message-box">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <!-- Nội dung chính của từng trang con sẽ được đặt vào đây -->
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        
+    </div>
+</body>
+</html>
+

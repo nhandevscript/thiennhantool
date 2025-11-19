@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Thông Tin Cá Nhân{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 0 auto; text-align: center; border-top: 5px solid var(--color-success);">
+    <h2 style="font-size: 1.5em; font-weight: bold; color: var(--color-success); margin-bottom: 20px;">Xin chào, {{ user.name }}!</h2>
+    
+    <div style="border: 1px dashed #ccc; padding: 15px; border-radius: 4px; background-color: #f9f9f9;">
+        <p style="font-weight: 500; color: #444;">Trạng thái tài khoản: <span style="color: var(--color-success);">Hoạt động</span></p>
+        <p style="margin-top: 10px; color: #666;">
+            Hết hạn vào ngày: 
+            <span style="font-weight: bold; font-family: monospace; font-size: 1.1em; color: #333;">{{ user.expiry_date.split(' ')[0] }}</span>
+        </p>
+    </div>
+    
+    <a href="{{ url_for('logout') }}" class="btn btn-danger" style="margin-top: 20px; display: inline-block; width: auto; padding: 10px 20px; background-color: var(--color-danger);">
+        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+    </a>
+</div>
+{% endblock %}
+
